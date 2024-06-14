@@ -10,11 +10,19 @@ ft_strdup:
     push rdi                ; save src before malloc
     inc rax                 ; alloc len+1
     mov rdi, rax            ; malloc will alloc rdi bytes
-    call malloc wrt ..plt   ; will return pointer in rax
+    call malloc wrt ..plt   ; returns pointer in rax
+
+    ; error mgmt
+    test rax, rax           ; bitwise AND on rax
+    jz  .ret_error          ; if zero flag is set == null pointer
 
     mov rdi, rax            ; dest in rdi
     pop rsi                 ; src in rsi
 
     call ft_strcpy
 
+    ret
+
+.ret_error:
+    xor rax, rax            ; useless if already zero?
     ret
