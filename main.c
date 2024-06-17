@@ -49,6 +49,7 @@ int main(void)
     printf("[ASM]  buf='%s' res=%d errno=%d\n", buf2, res2, errno);
     errno = 0;
 
+
     printf("\n/*******************\\\n");
     printf("       WRITE          \n");
     printf("\\*******************/\n\n");
@@ -72,25 +73,67 @@ int main(void)
 
     printf("[ASM]\n");
     res2 = ft_write(-1, "Hello World\n", 12);
-    printf("errno=%d  return=%d\n\n", errno, res2);
+    printf("errno=%d  return=%d\n", errno, res2);
     errno = 0;
+
 
     printf("\n/*******************\\\n");
     printf("       STRCMP         \n");
     printf("\\*******************/\n\n");
 
+    res1 = strcmp("str 1", "str w2");
+    res2 = ft_strcmp("str 1", "str w2");
+
+    printf("[REAL] return=%d\n", res1);
+    printf("[ASM]  return=%d\n", res2);
+
+
     printf("\n/*******************\\\n");
     printf("       STRCPY         \n");
     printf("\\*******************/\n\n");
+
+    char    str1[12] = "Hello World";
+    char    str2[12];
+    char    str3[12];
+
+    char    *ret1 = strcpy(str2, str1);
+    char    *ret2 = ft_strcpy(str3, str1);
+
+    printf("[REAL] %s\n", str2);
+    printf("[ASM]  %s\n", str3);
+
+    printf("[REAL] %s\n", ret1);
+    printf("[ASM]  %s\n", ret2);
+
 
     printf("\n/*******************\\\n");
     printf("       STRLEN         \n");
     printf("\\*******************/\n\n");
 
+    res1 = strlen(str1);
+    res2 = ft_strlen(str1);
+
+    printf("[REAL] return=%d\n", res1);
+    printf("[ASM]  return=%d\n", res2);
+
+
     printf("\n/*******************\\\n");
     printf("       STRDUP         \n");
     printf("\\*******************/\n\n");
 
+    char    *str4 = NULL;
+    char    *str5 = NULL;
+
+    str4 = strdup(str1);
+    str5 = ft_strdup(str1);
+
+    printf("[REAL] %s\n", str4);
+    printf("[ASM]  %s\n", str5);
+
+    if (str4)
+        free(str4);
+    if (str5)
+        free(str5);
 
     return 0;
 }
