@@ -15,8 +15,15 @@ ft_strcmp:
 
 .not_equal:
     sub     al, bl      ; sub chars
-    movsx   rax, al     ; mov sign extended (bc into larger register)
-    ret                 ; returning diff, real function just +1 or -1 i think ?
+    test    al, al      ; to return only 1 or -1
+    js      .negative   ; jump if signed
+    
+    mov     rax, 1
+    ret
+
+.negative:
+    mov     rax, -1
+    ret
 
 .equal:
     xor rax, rax        ; if equal return 0
