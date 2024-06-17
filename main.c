@@ -36,14 +36,14 @@ int main(void)
     errno = 0;
 
     // Read from file
-    fd = open("text.txt", O_RDONLY);
+    fd = open("main.c", O_RDONLY);
     res1 = read(fd, buf1, 15);
 
     printf("[REAL] buf='%s' res=%d errno=%d\n", buf1, res1, errno);
     errno = 0;
 
     close(fd);
-    fd = open("text.txt", O_RDONLY);
+    fd = open("main.c", O_RDONLY);
     res2 = ft_read(fd, buf2, 15);
 
     printf("[ASM]  buf='%s' res=%d errno=%d\n", buf2, res2, errno);
