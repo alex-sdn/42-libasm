@@ -8,6 +8,7 @@ ft_read:
     cmp     rax, 0
     jge     no_error    ; if rax >= 0 no errors
 
+    mov     byte [rsi], 0              ; clear first byte to avoid errors
     neg     rax                        ; rax *= -1
     push    rax                        ; push value in rax to stack
     call    __errno_location wrt ..plt ; will set errno address in rax (with respect to Procedure Linkage Table)
