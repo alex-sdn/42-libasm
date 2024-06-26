@@ -18,16 +18,16 @@ void    print_tag(char *func)
     printf("\n/*******************\\\n");
     printf("%s\n", func);
     printf("\\*******************/\n\n");
-    printf("\033[1;0m");
+    write(1, "\033[1;0m", 7);
 }
 
 void    read_test()
 {
-    char    buf1[20];
-    char    buf2[20];
-    int     res1;
-    int     res2;
-    int     fd;
+    static char buf1[20];
+    static char buf2[20];
+    int         res1;
+    int         res2;
+    int         fd;
     
     // Read wrong fd
     res1 = read(-1, buf1, 15);
@@ -42,14 +42,14 @@ void    read_test()
 
     // Read from file
     fd = open("main.c", O_RDONLY);
-    res1 = read(fd, buf1, 15);
+    res1 = read(fd, buf1, 19);
 
     printf("[REAL] buf='%s' res=%d errno=%d\n", buf1, res1, errno);
     errno = 0;
 
     close(fd);
     fd = open("main.c", O_RDONLY);
-    res2 = ft_read(fd, buf2, 15);
+    res2 = ft_read(fd, buf2, 19);
 
     printf("[ASM]  buf='%s' res=%d errno=%d\n", buf2, res2, errno);
     errno = 0;
@@ -61,25 +61,21 @@ void    write_test()
     int     res2;
 
     // Normal write
-    printf("[REAL]\n");
     res1 = write(1, "Hello World\n", 12);
-    printf("errno=%d  return=%d\n\n", errno, res1);
+    printf("[REAL] errno=%d  return=%d\n\n", errno, res1);
     errno = 0;
 
-    printf("[ASM]\n");
     res2 = ft_write(1, "Hello World\n", 12);
-    printf("errno=%d  return=%d\n\n", errno, res2);
+    printf("[ASM] errno=%d  return=%d\n\n", errno, res2);
     errno = 0;
 
     // Wrong fd error
-    printf("[REAL]\n");
     res1 = write(-1, "Hello World\n", 12);
-    printf("errno=%d  return=%d\n\n", errno, res1);
+    printf("[REAL] errno=%d  return=%d\n\n", errno, res1);
     errno = 0;
 
-    printf("[ASM]\n");
     res2 = ft_write(-1, "Hello World\n", 12);
-    printf("errno=%d  return=%d\n", errno, res2);
+    printf("[ASM] errno=%d  return=%d\n", errno, res2);
     errno = 0;
 }
 
