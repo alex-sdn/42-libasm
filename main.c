@@ -28,7 +28,7 @@ void    read_test()
     int         res1;
     int         res2;
     int         fd;
-    
+
     // Read wrong fd
     res1 = read(-1, buf1, 15);
     
