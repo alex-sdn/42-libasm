@@ -12,12 +12,17 @@ char    *ft_strcpy(char *, const char *);
 char    *ft_strdup(const char *s);
 size_t  ft_strlen(const char *);
 
-int main(void)
+void    print_tag(char *func)
 {
-    printf("/*******************\\\n");
-    printf("        READ          \n");
+    printf("\033[1;36m");
+    printf("\n/*******************\\\n");
+    printf("%s\n", func);
     printf("\\*******************/\n\n");
+    printf("\033[1;0m");
+}
 
+void    read_test()
+{
     char    buf1[20];
     char    buf2[20];
     int     res1;
@@ -48,11 +53,12 @@ int main(void)
 
     printf("[ASM]  buf='%s' res=%d errno=%d\n", buf2, res2, errno);
     errno = 0;
+}
 
-
-    printf("\n/*******************\\\n");
-    printf("       WRITE          \n");
-    printf("\\*******************/\n\n");
+void    write_test()
+{
+    int     res1;
+    int     res2;
 
     // Normal write
     printf("[REAL]\n");
@@ -75,23 +81,22 @@ int main(void)
     res2 = ft_write(-1, "Hello World\n", 12);
     printf("errno=%d  return=%d\n", errno, res2);
     errno = 0;
+}
 
-
-    printf("\n/*******************\\\n");
-    printf("       STRCMP         \n");
-    printf("\\*******************/\n\n");
+void    strcmp_test()
+{
+    int     res1;
+    int     res2;
 
     res1 = strcmp("str 1", "str w2");
     res2 = ft_strcmp("str 1", "str w2");
 
     printf("[REAL] return=%d\n", res1);
     printf("[ASM]  return=%d\n", res2);
+}
 
-
-    printf("\n/*******************\\\n");
-    printf("       STRCPY         \n");
-    printf("\\*******************/\n\n");
-
+void    strcpy_test()
+{
     char    str1[12] = "Hello World";
     char    str2[12];
     char    str3[12];
@@ -104,36 +109,58 @@ int main(void)
 
     printf("[REAL] %s\n", ret1);
     printf("[ASM]  %s\n", ret2);
+}
 
-
-    printf("\n/*******************\\\n");
-    printf("       STRLEN         \n");
-    printf("\\*******************/\n\n");
+void    strlen_test()
+{
+    char    str1[12] = "Hello World";
+    int     res1;
+    int     res2;
 
     res1 = strlen(str1);
     res2 = ft_strlen(str1);
 
     printf("[REAL] return=%d\n", res1);
     printf("[ASM]  return=%d\n", res2);
+}
 
+void    strdup_test()
+{
+    char    str1[12] = "Hello World";
+    char    *str2 = NULL;
+    char    *str3 = NULL;
 
-    printf("\n/*******************\\\n");
-    printf("       STRDUP         \n");
-    printf("\\*******************/\n\n");
+    str2 = strdup(str1);
+    str3 = ft_strdup(str1);
 
-    char    *str4 = NULL;
-    char    *str5 = NULL;
+    printf("[REAL] %s\n", str2);
+    printf("[ASM]  %s\n", str3);
 
-    str4 = strdup(str1);
-    str5 = ft_strdup(str1);
+    if (str2)
+        free(str2);
+    if (str3)
+        free(str3);
+}
 
-    printf("[REAL] %s\n", str4);
-    printf("[ASM]  %s\n", str5);
+int main(void)
+{
+    print_tag("        READ         ");
+    read_test();
 
-    if (str4)
-        free(str4);
-    if (str5)
-        free(str5);
+    print_tag("       WRITE         ");
+    write_test();
+
+    print_tag("       STRCMP       ");
+    strcmp_test();
+
+    print_tag("       STRCPY        ");
+    strcpy_test();
+
+    print_tag("       STRLEN        ");
+    strlen_test();
+
+    print_tag("       STRDUP        ");
+    strdup_test();
 
     return 0;
 }
