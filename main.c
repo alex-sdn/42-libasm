@@ -102,7 +102,7 @@ void    strcpy_test()
     char    *ret2 = ft_strcpy(str3, str1);
 
     printf("[REAL] %s\n", str2);
-    printf("[ASM]  %s\n", str3);
+    printf("[ASM]  %s\n\n", str3);
 
     printf("[REAL] %s\n", ret1);
     printf("[ASM]  %s\n", ret2);
