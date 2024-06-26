@@ -6,7 +6,7 @@ ft_write:
    mov   rax, 1      ; move sys_write to rax
    syscall           ; system call write()
    cmp   rax, 0
-   jge   .no_error   ; if rax >= 0 skip to .no_error
+   jge   no_error    ; if rax >= 0 skip to no_error
 
    neg   rax                        ; rax *= -1
    push  rax                        ; push value in rax to stack
@@ -16,6 +16,5 @@ ft_write:
    mov   [rbx], rax                 ; store error code in errno address
    mov   rax, -1                    ; set return value to -1
 
-.no_error:
+no_error:
    ret               ; returns value in rax
-   
