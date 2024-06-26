@@ -66,16 +66,17 @@ void    write_test()
     errno = 0;
 
     res2 = ft_write(1, "Hello World\n", 12);
-    printf("[ASM] errno=%d  return=%d\n\n", errno, res2);
+    printf("[ASM]  errno=%d  return=%d\n\n", errno, res2);
     errno = 0;
 
     // Wrong fd error
+    printf("write in wrong fd:\n");
     res1 = write(-1, "Hello World\n", 12);
     printf("[REAL] errno=%d  return=%d\n\n", errno, res1);
     errno = 0;
 
     res2 = ft_write(-1, "Hello World\n", 12);
-    printf("[ASM] errno=%d  return=%d\n", errno, res2);
+    printf("[ASM]  errno=%d  return=%d\n", errno, res2);
     errno = 0;
 }
 
@@ -84,8 +85,8 @@ void    strcmp_test()
     int     res1;
     int     res2;
 
-    res1 = strcmp("str 1", "str w2");
-    res2 = ft_strcmp("str 1", "str w2");
+    res1 = strcmp("str 1", "str aaa");
+    res2 = ft_strcmp("str 1", "str aaa");
 
     printf("[REAL] return=%d\n", res1);
     printf("[ASM]  return=%d\n", res2);
