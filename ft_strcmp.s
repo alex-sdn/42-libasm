@@ -1,5 +1,5 @@
 section .text
-    global ft_strcmp ; (*s1 = rdi, *s2 = rsi)
+    global ft_strcmp    ; (*s1 = rdi, *s2 = rsi)
 
 ft_strcmp:
     xor rcx, rcx        ; set count register at 0
