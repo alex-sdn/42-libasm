@@ -1,5 +1,5 @@
 section .text
-    global ft_strdup    ; (*src = rdi)
+    global ft_strdup        ; (*src = rdi)
     extern ft_strlen
     extern ft_strcpy
     extern malloc
@@ -14,7 +14,7 @@ ft_strdup:
 
     ; error mgmt
     test rax, rax           ; bitwise AND on rax
-    jz  .ret_error          ; if zero flag is set == null pointer
+    jz  ret_error           ; if zero flag is set == null pointer
 
     mov rdi, rax            ; dest in rdi
     pop rsi                 ; src in rsi
@@ -23,6 +23,6 @@ ft_strdup:
 
     ret
 
-.ret_error:
-    xor rax, rax            ; useless if already zero?
+ret_error:
+    xor rax, rax
     ret
