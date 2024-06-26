@@ -10,7 +10,7 @@ ft_read:
 
     neg     rax                        ; rax *= -1
     push    rax                        ; push value in rax to stack
-    call    __errno_location wrt ..plt ; will set errno address in rax (wrt ..plt -> jsp mais necessaire sinon compile pas)
+    call    __errno_location wrt ..plt ; will set errno address in rax (with respect to Procedure Linkage Table)
     mov     rbx, rax                   ; move errno address to rbx
     pop     rax                        ; retrieve error code from stack
     mov     [rbx], rax                 ; store error code in errno address
