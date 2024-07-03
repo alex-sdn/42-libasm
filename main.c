@@ -123,18 +123,18 @@ void    strlen_test()
 
 void    strdup_test()
 {
-    // ulimit -v 2770 to test error mgmt
+    // ulimit -v 2770 to fail malloc
     char    str1[12] = "Hello World";
     char    *str2 = NULL;
     char    *str3 = NULL;
 
     str2 = strdup(str1);
+    printf("[REAL] '%s' errno=%d\n", str2, errno);
+    errno = 0;
+
     str3 = ft_strdup(str1);
-
-    printf("[REAL] %s\n", str2);
-    printf("[ASM]  %s\n", str3);
-
-    printf("ERRNO=%d\n", errno);
+    printf("[ASM]  '%s' errno=%d\n", str3, errno);
+    errno = 0;
 
     if (str2)
         free(str2);
