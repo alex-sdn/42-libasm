@@ -3,6 +3,7 @@ section .text
     extern ft_strlen
     extern ft_strcpy
     extern malloc
+    extern __errno_location
 
 ft_strdup:
     call ft_strlen          ; returns len in rax
@@ -24,5 +25,9 @@ ft_strdup:
     ret
 
 ret_error:
-    xor rax, rax
+    pop rdi                          ; clear the stack
+    call  __errno_location wrt ..plt ; will set errno address in rax
+    mov rbx, 12
+    mov [rax], rbx                   ; malloc fail is ERRNO=12
+    xor rax, rax                     ; return 0
     ret

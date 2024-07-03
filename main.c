@@ -123,6 +123,7 @@ void    strlen_test()
 
 void    strdup_test()
 {
+    // ulimit -v 2770 to test error mgmt
     char    str1[12] = "Hello World";
     char    *str2 = NULL;
     char    *str3 = NULL;
@@ -132,6 +133,8 @@ void    strdup_test()
 
     printf("[REAL] %s\n", str2);
     printf("[ASM]  %s\n", str3);
+
+    printf("ERRNO=%d\n", errno);
 
     if (str2)
         free(str2);
