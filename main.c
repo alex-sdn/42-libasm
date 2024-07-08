@@ -53,6 +53,8 @@ void    read_test()
 
     printf("[ASM]  buf='%s' res=%d errno=%d\n", buf2, res2, errno);
     errno = 0;
+
+    close(fd);
 }
 
 void    write_test()
